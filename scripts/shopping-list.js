@@ -1,5 +1,5 @@
 import store from './store.js';
-
+import item from './item.js';
 const generateItemElement = function (item) {
   let itemTitle = `<span class="shopping-item shopping-item__checked">${item.name}</span>`;
   if (!item.checked) {
@@ -41,8 +41,15 @@ const render = function () {
   $('.js-shopping-list').html(shoppingListItemsString);
 };
 
-const addItemToShoppingList = function (itemName) {
-  store.items.push({ id: cuid(), name: itemName, checked: false });
+const addItemToShoppingList = function (name) {
+  try{
+    item.validateName(name);
+    store.items.push(item.create(name));
+    render();
+  }
+  catch(error){
+    console.log('Cannot add item: ${error.message}');
+  }
 };
 
 const handleNewItemSubmit = function () {
@@ -141,4 +148,4 @@ export default {
   render,
   bindEventListeners
 };
-console.log(store);
+
