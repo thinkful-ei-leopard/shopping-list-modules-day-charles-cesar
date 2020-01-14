@@ -5,10 +5,15 @@ function validateName(name){
   } 
 }
 function create(name){
-  return({ id: cuid(), name:`${name}` , checked: false });
+  return { 
+    id: cuid(), 
+    name:`${name}`, 
+    checked: false 
+  };
 }
+
 
 export default{
   validateName,
-     create
- };
+  create
+};
